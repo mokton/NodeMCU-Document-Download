@@ -54,7 +54,7 @@ def download(level = "dev", single = False, module = ""):
     home = "http://nodemcu.readthedocs.io/en/" + level + "/en/modules/"
     direct_path = os.path.abspath(os.curdir) + "/" + level
     if not os.path.exists(direct_path):
-        os.mkdir(direct_path)
+        os.mkdir(direct_path) 
     if single:
         try:
             url = home + module
@@ -91,7 +91,7 @@ def replace_content(level = "dev", single = False, module = ""):
         os.mkdir(direct_path) 
     p1 = re.compile(r'<li class="toctree-l1 ">(.*)<li><span>Modules</span></li>', re.S)
     p2 = re.compile(r'<li class="toctree-l1 ">(.*?)<a class="" href="(.*?)">(.*?)</a>(.*?)</li>', re.S)
-    p3 = re.compile(r'<div class="rst-versions".*</div>', re.S)
+    p3 = re.compile(r'<div class="rst-versions.*</div>', re.S)
     if single:
         try:
             filename = direct_path + "/" + module + ".html"
@@ -182,7 +182,8 @@ def css_js(level = "dev"):
             print e
     try:
         html = get_page(icon)
-        fn = os.path.basename(url)
+        fn = os.path.basename(icon)
+        direct_path = os.path.abspath(os.curdir) + "/" + level
         if html <> "":
             filename = direct_path + "/" + fn
             f = open(filename, "w")
@@ -198,14 +199,13 @@ if __name__ == "__main__":
     #modules.sort()
     #for m in modules:
     #    print(m)
-    #level = "master" # no cron module
-    level = "dev"
+    level = "master" # no cron module
+    #level = "dev"
     download(level=level)
     #download(level=level, single=True,module="cron")
     replace_content(level=level)
     #replace_content(level=level, single=True,module="cron")
-    #css_js(level=level)
+    css_js(level=level)
     
     #download(level=level, single=True,module="websocket")
     #replace_content(level=level, single=True,module="websocket")
-    
