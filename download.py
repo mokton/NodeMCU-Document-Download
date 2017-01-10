@@ -22,6 +22,7 @@ css = ["http://nodemcu.readthedocs.io/en/master/css/theme.css",
        "http://nodemcu.readthedocs.io/en/master/css/extra.css",
        "https://media.readthedocs.org//css/badge_only.css",
        "https://media.readthedocs.org//css/readthedocs-doc-embed.css"]
+       
 js = ["http://nodemcu.readthedocs.io/en/master/js/jquery-2.1.1.min.js",
       "http://nodemcu.readthedocs.io/en/master/js/modernizr-2.8.3.min.js",
       "http://nodemcu.readthedocs.io/en/master/js/highlight.pack.js",
@@ -122,9 +123,9 @@ def replace_content(level = "dev", single = False, module = ""):
                 print e
                 
 def css_js(level = "dev"):
-    direct_path = os.path.abspath(os.curdir) + "/" + level
+    direct_path = os.path.abspath(os.curdir) + "/" + level + "/css"
     if not os.path.exists(direct_path):
-        os.mkdir(direct_path)
+        os.mkdir(direct_path) 
     for url in css:
         try:
             html = get_page(url)
@@ -139,7 +140,9 @@ def css_js(level = "dev"):
                 print(fn + " is empty.")
         except Exception, e:
             print e
-            
+    direct_path = os.path.abspath(os.curdir) + "/" + level + "/js"
+    if not os.path.exists(direct_path):
+        os.mkdir(direct_path) 
     for url in js:
         try:
             html = get_page(url)
@@ -156,9 +159,9 @@ def css_js(level = "dev"):
             print e
 
 if __name__ == "__main__":
-    #    modules.sort()
-    #    for m in modules:
-    #        print(m)
+    #modules.sort()
+    #for m in modules:
+    #    print(m)
     #level = "master" # no cron module
     level = "dev"
     download(level=level)
